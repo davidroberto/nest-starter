@@ -12,15 +12,25 @@ import { ArticleService } from '../service/article.service';
 import { ArticleCreateDto } from '../dto/article-create.dto';
 import { ArticleUpdateDto } from '../dto/article-update.dto';
 
+// @Controller('articles')
+// est un décorateur qui permet de déclarer un controller
+// donc une classe qui va contenir des routes (url accessible)
 @Controller('articles')
 export class ArticleController {
+  // injection de dépendance
+  // permet d'instancier la classe ArticleService
+  // dans la propriété articleService
   constructor(private readonly articleService: ArticleService) {}
 
+  // @Get() est un décorateur qui permet de déclarer
+  // une route accessible avec la méthode GET
   @Get()
   getAllArticles() {
     return this.articleService.getAllarticles();
   }
 
+  // on peut passer en parametre du décorateur
+  // un segment d'url avec éventuellement des paramètres
   @Get(':id')
   getOneArticleById(@Param('id', ParseIntPipe) id: number) {
     return this.articleService.getOneArticleById(id);
