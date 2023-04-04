@@ -8,6 +8,10 @@ import { ArticleCreateDto } from '../dto/article-create.dto';
 Injectable();
 export class ArticleService {
   constructor(
+    // on "injecte" le repository de l'entité Article
+    // dans la propriété articleRepository de la classe ArticleService
+    // pour pouvoir ensuite utiliser les méthodes du repository
+    // dans les méthodes de notre service
     @InjectRepository(Article)
     private readonly articleRepository: Repository<Article>,
   ) {}
@@ -29,8 +33,12 @@ export class ArticleService {
   }
 
   async updateArticle(id: number, data: ArticleUpdateDto) {
+    // on récupère l'article ciblé
     const article = await this.articleRepository.findOneBy({ id });
+    // on "merge" les données du body de la requête
+    // avec les données déjà présentes dans l'article
     const articleUpdate = { ...article, ...data };
+    // on sauvegarde l'article mis à jour
     await this.articleRepository.save(articleUpdate);
 
     return articleUpdate;

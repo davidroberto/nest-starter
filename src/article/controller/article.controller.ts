@@ -31,12 +31,17 @@ export class ArticleController {
 
   // on peut passer en parametre du décorateur
   // un segment d'url avec éventuellement des paramètres
+  // on peut ensuite récupérer sa valeur avec le décorateur @Param
   @Get(':id')
   getOneArticleById(@Param('id', ParseIntPipe) id: number) {
     return this.articleService.getOneArticleById(id);
   }
 
   @Post()
+  // on utilise le décorateur @Body pour récupérer
+  // les données du body de la requête
+  // on valide les données du body de la requête
+  // avec un DTO (Data Transfer Object)
   createArticle(@Body() data: ArticleCreateDto) {
     return this.articleService.createArticle(data);
   }
