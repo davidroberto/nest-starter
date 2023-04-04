@@ -2,7 +2,7 @@ Nest.js starter repo
 
 - npm install
 - docker-compose up -d
-- npm start
+- npm run start:dev
 
 Accès :
 localhost:8000
