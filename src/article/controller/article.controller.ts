@@ -8,9 +8,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ArticleService } from '../service/article.service';
+import { ArticleService } from '../use-case/article.service';
 import { ArticleCreateDto } from '../dto/article-create.dto';
 import { ArticleUpdateDto } from '../dto/article-update.dto';
+import { CreateArticleService } from 'src/article/service/create-article.service';
 
 // @Controller('articles')
 // est un décorateur qui permet de déclarer un controller
@@ -20,7 +21,7 @@ export class ArticleController {
   // injection de dépendance
   // permet d'instancier la classe ArticleService
   // dans la propriété articleService
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(private readonly createArticleService: CreateArticleService) {}
 
   // @Get() est un décorateur qui permet de déclarer
   // une route accessible avec la méthode GET
@@ -43,7 +44,7 @@ export class ArticleController {
   // on valide les données du body de la requête
   // avec un DTO (Data Transfer Object)
   createArticle(@Body() data: ArticleCreateDto) {
-    return this.articleService.createArticle(data);
+    return this.createArticleService.createArticle(data);
   }
 
   @Put(':id')
